@@ -109,6 +109,7 @@
   (setq company-begin-commands '(self-insert-command)))
 
 ;; Feed reader
+
 (use-package elfeed
   :ensure t
   :config
@@ -121,12 +122,23 @@
 	  ("https://www.reddit.com/r/emacs/.rss" reddit emacs))))
 
 ;; Flycheck
+
 (use-package flycheck
   :ensure t
   :init
   (global-flycheck-mode)
   :config
   (add-hook 'go-mode-hook 'flycheck-mode))
+
+;; Markdown mode
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 ;; Go language
 
