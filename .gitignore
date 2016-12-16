@@ -1,6 +1,8 @@
 .emacs.desktop
 .emacs.desktop.lock
+auto-save-list/
 backups/
 custom.el
 elpa/
 history
+recentf
