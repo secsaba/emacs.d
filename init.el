@@ -140,6 +140,16 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+;; Magit
+
+(use-package magit
+  :ensure t
+  :commands magit-get-top-dir
+  :bind (("C-c g" . magit-status)
+	 ("C-c f" . magit-grep))
+  :config
+  (magit-auto-revert-mode))
+
 ;; Go language
 
 (use-package go-autocomplete
