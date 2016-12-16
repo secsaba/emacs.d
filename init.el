@@ -32,7 +32,7 @@
 (desktop-save-mode t)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file)
+(load custom-file 'noerror)
 
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
