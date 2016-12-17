@@ -145,8 +145,7 @@
 (use-package magit
   :ensure t
   :commands magit-get-top-dir
-  :bind (("C-c g" . magit-status)
-	 ("C-c f" . magit-grep))
+  :bind ("C-x g" . magit-status)
   :config
   (magit-auto-revert-mode))
 
