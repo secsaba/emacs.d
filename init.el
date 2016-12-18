@@ -49,7 +49,7 @@
 (use-package anzu
   :ensure t
   :config
-  (global-anzu-mode 1))
+  (global-anzu-mode))
 
 ;; Never loose your cursor
 (use-package beacon
@@ -80,8 +80,9 @@
 (use-package saveplace
   :ensure t
   :config
-  (setq-default save-place t)
-  (setq save-place-file (expand-file-name "places" user-emacs-directory)))
+  (progn
+    (setq-default save-place t)
+    (setq save-place-file (expand-file-name "places" user-emacs-directory))))
 
 ;; A generic completion framework
 
@@ -103,10 +104,7 @@
 (use-package company
   :ensure t
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-idle-delay .3)
-  (setq company-echo-delay 0)
-  (setq company-begin-commands '(self-insert-command)))
+  (global-company-mode))
 
 ;; Feed reader
 
@@ -125,10 +123,8 @@
 
 (use-package flycheck
   :ensure t
-  :init
-  (global-flycheck-mode)
   :config
-  (add-hook 'go-mode-hook 'flycheck-mode))
+  (global-flycheck-mode))
 
 ;; Markdown mode
 
@@ -149,29 +145,41 @@
   :config
   (magit-auto-revert-mode))
 
+;; YASnippet - a template system
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode))
+
 ;; Go language
 
-(use-package go-autocomplete
-  :ensure t)
+(use-package go-mode
+  :ensure t
+  :config
+  (progn
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook #'gofmt-before-save)))
+
+(use-package flycheck-gometalinter
+  :ensure t
+  :config
+  (progn
+    (flycheck-gometalinter-setup)
+    (setq flycheck-gometalinter-vendor t)
+    (setq flycheck-gometalinter-fast t)))
 
 (use-package go-eldoc
   :ensure t
   :config
   (add-hook 'go-mode-hook 'go-eldoc-setup))
 
-(use-package go-errcheck
+(use-package gotest
   :ensure t)
 
 (use-package company-go
   :ensure t
   :config
-  (add-hook 'go-mode-hook (lambda ()
-			    (set (make-local-variable 'company-backends) '(company-go))
-			    (company-mode))))
-
-(use-package go-mode
-  :ensure t
-  :config
-  (setq gofmt-command "goimports"))
+  (eval-after-load 'company '(add-to-list 'company-backends 'company-go)))
 
 ;;; init.el ends here
