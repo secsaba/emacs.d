@@ -117,7 +117,11 @@
 	  ("http://irreal.org/blog/?feed=rss2" blog emacs)
 	  ("https://www.masteringemacs.org/feed" blog emacs)
 	  ("http://planet.emacsen.org/atom.xml" emacs planet)
-	  ("https://www.reddit.com/r/emacs/.rss" reddit emacs))))
+	  ("https://www.reddit.com/r/emacs/.rss" reddit emacs)
+	  ;; go
+	  ("https://www.reddit.com/r/golang/.rss" reddit go)
+	  ("http://golangweekly.com/rss/2568jh79" weekly go)
+	  ("http://blog.golang.org/feed.atom" blog go))))
 
 ;; Flycheck
 
