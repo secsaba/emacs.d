@@ -156,6 +156,13 @@
   :config
   (yas-global-mode))
 
+;; Org
+
+(use-package org
+  :ensure t
+  :bind (("C-c a" . org-agenda)
+	 ("C-c c" . org-capture)))
+
 ;; Go language
 
 (use-package go-mode
