@@ -1,4 +1,4 @@
-;;; init.el --- Sets up emacs environment
+;;; init.el --- Sets up Emacs environment
 ;;; Commentary:
 
 ;;; Code:
@@ -46,12 +46,14 @@
   :bind ("M-p" . ace-window))
 
 ;; Display current search and total search
+
 (use-package anzu
   :ensure t
   :config
   (global-anzu-mode))
 
 ;; Never loose your cursor
+
 (use-package beacon
   :ensure t
   :config
@@ -89,15 +91,28 @@
 (use-package smex
   :ensure t)
 
-(use-package counsel
+(use-package flx
   :ensure t)
 
-(use-package swiper
+(use-package ivy
   :ensure t
+  :bind (:map ivy-minibuffer-map ("C-'" . ivy-avy))
   :config
   (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) "))
+  (setq ivy-use-virtual-buffers t
+	ivy-height 10
+	ivy-initial-inputs-alist nil
+	ivy-count-format ""
+	ivy-virtual-abbreviate 'full
+	ivy-extra-directories nil
+	ivy-wrap t)
+  (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+				(t . ivy--regex-fuzzy))))
+
+(use-package counsel
+  :ensure t
+  :config
+  (counsel-mode 1))
 
 ;; Modular in-buffer completion
 
@@ -112,13 +127,13 @@
   :ensure t
   :config
   (setq elfeed-feeds
-	'(;; emacs
+	'(;; Emacs
 	  ("http://emacshorrors.com/feed.atom" blog emacs)
 	  ("http://irreal.org/blog/?feed=rss2" blog emacs)
 	  ("https://www.masteringemacs.org/feed" blog emacs)
 	  ("http://planet.emacsen.org/atom.xml" emacs planet)
 	  ("https://www.reddit.com/r/emacs/.rss" reddit emacs)
-	  ;; go
+	  ;; Go language
 	  ("https://www.reddit.com/r/golang/.rss" reddit go)
 	  ("http://golangweekly.com/rss/2568jh79" weekly go)
 	  ("http://blog.golang.org/feed.atom" blog go))))
