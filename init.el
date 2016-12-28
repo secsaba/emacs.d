@@ -138,6 +138,16 @@
 	  ("http://golangweekly.com/rss/2568jh79" weekly go)
 	  ("http://blog.golang.org/feed.atom" blog go))))
 
+;; E-mail reader
+
+(use-package notmuch
+  :ensure t)
+
+(setq message-send-mail-function 'message-send-mail-with-sendmail)
+(setq sendmail-program "/opt/local/bin/msmtp")
+(setq message-sendmail-extra-arguments '("--read-envelope-from"))
+(setq message-sendmail-f-is-evil 't)
+
 ;; Flycheck
 
 (use-package flycheck
