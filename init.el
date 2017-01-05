@@ -37,7 +37,13 @@
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
                  (concat user-emacs-directory "backups")))))
-(setq vc-make-backup-files t)
+(setq vc-make-backup-files t
+      version-control t
+      backup-by-copying t
+      kept-new-versions 64
+      kept-old-versions 0
+      delete-old-versions nil)
+
 
 ;; Easy windows switching
 
